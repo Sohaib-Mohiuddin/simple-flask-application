@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import requests, json
+import requests, pytz
 
 app = Flask(__name__)
 
@@ -19,13 +19,14 @@ def submit():
             response = requests.get(search_results.format(city, api_key)).json()
             
             weather = {
-                'city': city,
+                'city': response['name'].title(),
                 'tempurature': response['main']['temp'],
                 'feels_like': response['main']['feels_like'],
                 'temp_min': response['main']['temp_min'],
                 'temp_max': response['main']['temp_max'],
                 'description': response['weather'][0]['description'],
-                'icon': response['weather'][0]['icon']
+                'icon': response['weather'][0]['icon'],
+                'country': pytz.country_names[response['sys']['country']]
             }
     return render_template('index.html', weather=weather)
 
