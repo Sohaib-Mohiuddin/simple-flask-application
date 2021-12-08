@@ -8,10 +8,10 @@ verify_ssl = true
 [packages]
 flask = "*"
 psycopg2 = "*"
-psycopg2-binary = "*"
 gunicorn = "*"
 requests = "*"
-json = "*"
+flask-sqlalchemy = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.9"
